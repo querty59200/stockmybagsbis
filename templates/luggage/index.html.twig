@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% for luggage in luggages %}
+        <div class="col-md-4">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ luggage.name }}</h5>
+                    <p class="card-text">{{ luggage.description }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <a class="btn btn-link" href="{{ path('luggage_show', {'id' : luggage.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Détail</button>
+                            {% if is_granted('ROLE_ADMIN')%}
+                                <a class="btn btn-link" href="{{ path('luggage_edit', {'id' : luggage.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</button>
+                            {% endif %}
+                        </div>
+                        <a class="js-like btn btn-link" href="{{ path('luggage_reaction', {'id' : luggage.id}) }}">
+                            {% if app.user and luggage.likedByUser(app.user) %}
+                                <i class="fas fa-thumbs-up"></i>
+                            {% else %}
+                                <i class="far fa-thumbs-up"></i>
+                            {% endif %}
+                            <span class="js-likes">{{ luggage.reactions | length }}</span>
+                            <span>J'aime</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+
+        function onClickBtnReaction(event){
+
+            event.preventDefault();
+
+            let url = this.href;
+            let spanCount = document.querySelector(".js-likes");
+            let i = document.querySelector("i");
+
+            axios.get(url)
+                .then((response) => {
+                console.log(response);
+                spanCount.textContent = response.data.reactions;
+                if(i.classList.contains("fas")){
+                    i.classList.replace("fas","far");
+                } else {
+                    i.classList.replace("far","fas");
+                }
+            })
+                .catch((error) => {
+                if(error.response.status == '403'){
+                    window.alert("Vous devez être connecté pour liker un bagage");
+                } else {
+                    window.alert("Réssayer plus tard");
+                }
+            })
+        }
+
+        document.querySelectorAll(".js-like").forEach(
+            function (link) {
+            link.addEventListener("click", onClickBtnReaction);
+            }
+            )
+
+    </script>
+
+{% endblock %}
