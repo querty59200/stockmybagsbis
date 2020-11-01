@@ -1,7 +1,59 @@
 {% extends 'base.html.twig' %}
 
+{% block title luggage.name %}
+
 {% block body %}
-    {{ luggage.name }}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                {% for photo in luggage.photos %}
+                    <img src="{{ photo.link }}" alt="image cap">
+                {% endfor %}
+            </div>
+            <div class="col-md-4">
+                <h1>{{ luggage.name }}</h1>
+                <h2>{{ luggage.description }}</h2>
+                <div class="text-primary">{{ luggage.price }} Euros</div>
+                <a href="#" class="btn btn-primary">Réservez</a>
+            </div>
+        </div>
+        <p>{{ luggage.description | nl2br }}</p>
+        <div class="row">
+            <div class="col-md-8">
+                <h2>Caractéristique</h2>
+                <table class="table table-striped">
+                    <tr>
+                        <td>Longueur</td>
+                        <td>{{ luggage.length }} cm</td>
+                    </tr>
+                    <tr>
+                        <td>Largeur</td>
+                        <td>{{ luggage.width }} cm</td>
+                    </tr>
+                    <tr>
+                        <td>Hauteur</td>
+                        <td>{{ luggage.height }} cm</td>
+                    </tr>
+                    <tr>
+                        <td>Poids</td>
+                        <td>{{ luggage.weight }} grammes</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-8">
+                <h2>Spécificités</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus aliquid amet consectetur corporis
+                    deserunt ex excepturi pariatur reiciendis totam voluptates. At deleniti ea est fuga id ipsam
+                    laudantium modi nihil nisi officiis pariatur, repudiandae, totam voluptatum? Debitis explicabo
+                    illum, ipsum magni non, provident quas rem repellat rerum, soluta sunt voluptas.</p>
+                <p>Adipisci dolores modi quam repellendus ullam. Aperiam asperiores commodi consequuntur cum dignissimos
+                    dolores doloribus eaque esse eum fugit inventore labore magnam maxime modi molestias nemo non
+                    officiis quasi quibusdam quidem quos ratione rem repudiandae, rerum suscipit tempore voluptatibus.
+                    Enim ipsam laborum repudiandae saepe. Consectetur dicta distinctio obcaecati optio perferendis,
+                    rerum?</p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 

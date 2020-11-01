@@ -1,46 +1,73 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for luggage in luggages %}
-        <div class="col-md-4">
-            <div class="card mb-4 box-shadow">
-                <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">{{ luggage.name }}</h5>
-                    <p class="card-text">{{ luggage.description }}</p>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <a class="btn btn-link" href="{{ path('luggage_show', {'id' : luggage.id}) }}" type="button" class="btn btn-sm btn-outline-secondary">Détail</button>
-                            {% if is_granted('ROLE_ADMIN')%}
-                                <a class="btn btn-link" href="{{ path('luggage_edit', {'id' : luggage.id}) }}" class="btn btn-sm btn-outline-secondary">Editer</button>
-                            {% endif %}
-                        </div>
-                        <a class="js-like btn btn-link" href="{{ path('luggage_reaction', {'id' : luggage.id}) }}">
-                            {% if app.user and luggage.likedByUser(app.user) %}
-                                <i class="fas fa-thumbs-up"></i>
-                            {% else %}
-                                <i class="far fa-thumbs-up"></i>
-                            {% endif %}
-                            <span class="js-likes">{{ luggage.reactions | length }}</span>
-                            <span>J'aime</span>
-                        </a>
-                    </div>
+
+    <div class="jumbotron">
+            {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col">
+                    {{ form_row(form.maxPrice) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.minvolume) }}
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary">
+                        Rechercher
+                    </button>
                 </div>
             </div>
-        </div>
-    {% endfor %}
+            {{ form_end(form) }}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(luggages) }}
+    </div>
+    <div class="container row flex">
+        {% for luggage in luggages %}
+            {% if luggage.available %}
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ luggage.name }}</h5>
+                            <p class="card-text">{{ luggage.description }}</p>
+                            <p class="card-text">{{ luggage.price }} €</p>
+                            <p>Disponible en ce moment</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-link" href="{{ path('luggage_show', {'id' : luggage.id, 'slug' : luggage.slug}) }}" class="btn btn-sm btn-outline-secondary">Détail</a>
+                                        {% if is_granted('ROLE_ADMIN')%}
+                                            <a class="btn btn-link" href="{{ path('luggage_edit', {'id' : luggage.id, 'slug' : luggage.slug}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
+                                        {% endif %}
+                                    </div>
+                                    <a class="js-like btn btn-link" href="{{ path('luggage_reaction', {'id' : luggage.id}) }}">
+                                        {% if app.user and luggage.likedByUser(app.user) %}
+                                            <i class="fas fa-thumbs-up"></i>
+                                        {% else %}
+                                            <i class="far fa-thumbs-up"></i>
+                                        {% endif %}
+                                        <span class="js-likes">{{ luggage.reactions | length }}</span>
+                                        <span>J'aime</span>
+                                    </a>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
 
-        function onClickBtnReaction(event){
+        function onClickBtnReaction(event) {
 
             event.preventDefault();
 
             let url = this.href;
-            let spanCount = document.querySelector(".js-likes");
+            let spanCount = document.querySelector("js-likes");
             let i = document.querySelector("i");
 
             axios.get(url)
@@ -54,7 +81,7 @@
                 }
             })
                 .catch((error) => {
-                if(error.response.status == '403'){
+                if(error.response.status === '403'){
                     window.alert("Vous devez être connecté pour liker un bagage");
                 } else {
                     window.alert("Réssayer plus tard");
@@ -62,7 +89,7 @@
             })
         }
 
-        document.querySelectorAll(".js-like").forEach(
+        document.querySelectorAll("js-like").forEach(
             function (link) {
             link.addEventListener("click", onClickBtnReaction);
             }

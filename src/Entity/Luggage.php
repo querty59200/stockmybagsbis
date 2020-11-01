@@ -6,6 +6,7 @@ use App\Repository\LuggageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Cocur\Slugify\Slugify;
 
 /**
  * @ORM\Entity(repositoryClass=LuggageRepository::class)
@@ -29,6 +30,42 @@ class Luggage
      */
     private $description;
 
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $available;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $price;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $height;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $length;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $width;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $weight;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Photo::class, mappedBy="luggage")
+     */
+    private $photos;
+
     /**
      * @ORM\OneToMany(targetEntity=Reaction::class, mappedBy="luggage", orphanRemoval=true)
      */
@@ -37,6 +74,7 @@ class Luggage
     public function __construct()
     {
         $this->reactions = new ArrayCollection();
+        $this->photos = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -47,6 +85,11 @@ class Luggage
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    public function getSlug(){
+        return (new Slugify())->slugify($this->name);
+
     }
 
     public function setName(string $name): self
@@ -64,6 +107,77 @@ class Luggage
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+    public function getAvailable(): ?bool
+    {
+        return $this->available;
+    }
+
+    public function setAvailable(bool $available): self
+    {
+        $this->available = $available;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getHeight(): ?float
+    {
+        return $this->height;
+    }
+
+    public function setHeight(float $height): self
+    {
+        $this->height = $height;
+
+        return $this;
+    }
+
+    public function getLength(): ?float
+    {
+        return $this->length;
+    }
+
+    public function setLength(float $length): self
+    {
+        $this->length = $length;
+
+        return $this;
+    }
+
+    public function getWidth(): ?float
+    {
+        return $this->width;
+    }
+
+    public function setWidth(float $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getWeight(): ?float
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(float $weight): self
+    {
+        $this->weight = $weight;
 
         return $this;
     }
@@ -92,6 +206,43 @@ class Luggage
             // set the owning side to null (unless already changed)
             if ($reaction->getLuggage() === $this) {
                 $reaction->setLuggage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Photo[]
+     */
+    public function getPhotos(): Collection
+    {
+        return $this->photos;
+    }
+
+    public function setPhotos(Photo $photos): self
+    {
+        $this->photos = $photos;
+
+        return $this;
+    }
+
+    public function addPhoto(Photo $photo): self
+    {
+        if (!$this->photos->contains($photo)) {
+            $this->photos[] = $photo;
+            $photo->setLuggage($this);
+        }
+
+        return $this;
+    }
+
+    public function removePhoto(Photo $photo): self
+    {
+        if ($this->photos->removeElement($photo)) {
+            // set the owning side to null (unless already changed)
+            if ($photo->getLuggage() === $this) {
+                $photo->setLuggage(null);
             }
         }
 
