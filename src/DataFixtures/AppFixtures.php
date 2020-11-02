@@ -28,6 +28,7 @@ class AppFixtures extends Fixture {
         $plainPassword = 'azerty';
         $encoded = $this->encoder->encodePassword($user, $plainPassword);
         $user->setPassword($encoded);
+        $user->setRoles(array(1 => 'ROLE_ADMIN'));
         $manager->persist($user);
 
         $luggages = [];

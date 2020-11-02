@@ -14,25 +14,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="07679915-bc1d-436f-9a5a-b14349c03e2d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/config/packages/knp_paginator.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/LuggageSearch.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/translations/KnpPaginatorBundle.fr.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/nouvelletechnologie.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/nouvelletechnologie.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/CartController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Service/Cart/CartService.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/Version20201029160326.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LuggageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LuggageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201101194936.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20201101201841.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataFixtures/AppFixtures.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Luggage.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Luggage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/LuggageRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/LuggageRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/luggage/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/luggage/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/luggage/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/luggage/show.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +181,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Controller" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
     <property name="settings.editor.selected.configurable" value="diff.external" />
@@ -198,8 +189,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\symfony\nouvelletechnologie\templates" />
       <recent name="C:\symfony\nouvelletechnologie\src\Controller" />
+      <recent name="C:\symfony\nouvelletechnologie\templates" />
       <recent name="C:\symfony\nouvelletechnologie\src\Entity" />
       <recent name="C:\symfony\nouvelletechnologie" />
     </key>
@@ -223,7 +214,8 @@
       <workItem from="1604241459121" duration="982000" />
       <workItem from="1604242543029" duration="5520000" />
       <workItem from="1604256541442" duration="2186000" />
-      <workItem from="1604260057603" duration="5755000" />
+      <workItem from="1604260057603" duration="5971000" />
+      <workItem from="1604303271185" duration="16694000" />
     </task>
     <servers />
   </component>
@@ -252,14 +244,14 @@
     </state>
     <state x="476" y="72" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728/62.-768.1304.768@0.0.1366.728" timestamp="1604236199943" />
     <state x="476" y="72" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1604262238040" />
-    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1603964341507">
+    <state x="161" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604310484546">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1603964341507" />
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603970014742">
+    <state x="161" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1366.728@0.0.1366.728" timestamp="1604310484546" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604323013723">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1603970014742" />
+    <state x="413" y="118" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1604323013723" />
     <state x="471" y="86" key="NewPhpClassDialog" timestamp="1604236621905">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -269,13 +261,13 @@
     </state>
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728/62.-768.1304.768@0.0.1366.728" timestamp="1604242016596" />
     <state x="184" y="8" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1603985165542" />
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1604090788057">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1604265994066">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604090788057" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1603999711854">
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1604265994066" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1604306900916">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1603999711854" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1604306900916" />
   </component>
 </project>

@@ -19,8 +19,14 @@
             </div>
             {{ form_end(form) }}
     </div>
-    <div class="navigation">
+    <div class="navigation row-cols-1">
         {{ knp_pagination_render(luggages) }}
+        {% if app.user %}
+            <a href="{{ path('cart_show')}}" class="btn btn-info float-right">
+                <i class="fas fa-shopping-cart mr-1"></i>
+                Mon Panier
+            </a>
+        {% endif %}
     </div>
     <div class="container row flex">
         {% for luggage in luggages %}
@@ -39,9 +45,12 @@
                                         {% if is_granted('ROLE_ADMIN')%}
                                             <a class="btn btn-link" href="{{ path('luggage_edit', {'id' : luggage.id, 'slug' : luggage.slug}) }}" class="btn btn-sm btn-outline-secondary">Editer</a>
                                         {% endif %}
+                                        {% if app.user and is_granted('ROLE_USER')%}
+                                            <a class="js-add btn btn-link" href="{{ path('cart_add', {'id' : luggage.id}) }}" class="btn btn-sm btn-outline-secondary">Ajouter au panier</a>
+                                        {% endif %}
                                     </div>
                                     <a class="js-like btn btn-link" href="{{ path('luggage_reaction', {'id' : luggage.id}) }}">
-                                        {% if app.user and luggage.likedByUser(app.user) %}
+                                        {% if app.user and luggage.isLikedByUser(app.user) %}
                                             <i class="fas fa-thumbs-up"></i>
                                         {% else %}
                                             <i class="far fa-thumbs-up"></i>
@@ -67,8 +76,8 @@
             event.preventDefault();
 
             let url = this.href;
-            let spanCount = document.querySelector("js-likes");
-            let i = document.querySelector("i");
+            let spanCount = this.querySelector("js-likes");
+            let i = this.querySelector("i");
 
             axios.get(url)
                 .then((response) => {

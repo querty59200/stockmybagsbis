@@ -71,18 +71,24 @@ class Luggage
      */
     private $reactions;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Option::class, mappedBy="luggages")
+     */
+    private $options;
+
     public function __construct()
     {
         $this->reactions = new ArrayCollection();
         $this->photos = new ArrayCollection();
+        $this->options = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -99,7 +105,7 @@ class Luggage
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -122,7 +128,7 @@ class Luggage
         return $this;
     }
 
-    public function getPrice(): ?float
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -258,5 +264,32 @@ class Luggage
             }
         }
         return false;
+    }
+
+    /**
+     * @return Collection|Option[]
+     */
+    public function getOptions(): Collection
+    {
+        return $this->options;
+    }
+
+    public function addOption(Option $option): self
+    {
+        if (!$this->options->contains($option)) {
+            $this->options[] = $option;
+            $option->addLuggage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOption(Option $option): self
+    {
+        if ($this->options->removeElement($option)) {
+            $option->removeLuggage($this);
+        }
+
+        return $this;
     }
 }
